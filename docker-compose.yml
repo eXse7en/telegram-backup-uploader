@@ -1,0 +1,20 @@
+services:
+  telegram-bot-api:
+    image: aiogram/telegram-bot-api:latest
+    container_name: telegram-bot-api
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    env_file:
+      - .env.botapi
+    command:
+      - "--local"
+      - "--http-port=8081"
+      - "--dir=/var/lib/telegram-bot-api"
+    volumes:
+      - telegram_bot_api_data:/var/lib/telegram-bot-api
+      - /var/www/html/sirama/backup:/var/www/html/sirama/backup:ro
+
+volumes:
+  telegram_bot_api_data:
+
